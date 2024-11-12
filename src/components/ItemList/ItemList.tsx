@@ -119,20 +119,26 @@ const ItemList: React.FC = () => {
             />
 
             {/* Display filtered and sorted items */}
-            <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                {filteredItems.map(item => (
-                    <ItemCard
-                        key={item.id}
-                        title={item.title}
-                        body={item.body}
-                        onEdit={() => {
-                            setCurrentItem(item);
-                            setIsModalOpen(true); // Open modal for editing
-                        }}
-                        onDelete={() => handleDeleteItem(item.id)} // Delete item
-                    />
-                ))}
-            </div>
+            {filteredItems.length === 0 ? (
+                <div className="text-center text-gray-500">
+                    {searchTerm ? 'No items found matching your search criteria.' : 'Loading items...'}
+                </div>
+            ) : (
+                <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                    {filteredItems.map(item => (
+                        <ItemCard
+                            key={item.id}
+                            title={item.title}
+                            body={item.body}
+                            onEdit={() => {
+                                setCurrentItem(item);
+                                setIsModalOpen(true); // Open modal for editing
+                            }}
+                            onDelete={() => handleDeleteItem(item.id)} // Delete item
+                        />
+                    ))}
+                </div>
+            )}
         </div>
     );
 };
