@@ -79,8 +79,6 @@ const ItemList: React.FC = () => {
       return a.id - b.id;
     });
 
-  // Limit the filtered items to only 12
-  const limitedItems = filteredItems.slice(0, 12);
 
   return (
     <div className="container mx-auto p-4">
@@ -133,13 +131,13 @@ const ItemList: React.FC = () => {
       />
 
       {/* Display filtered and sorted items */}
-      {limitedItems.length === 0 ? (
+      {filteredItems.length === 0 ? (
         <div className="text-center text-gray-500">
           {searchTerm ? 'No items found matching your search criteria.' : 'Loading items...'}
         </div>
       ) : (
         <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {limitedItems.map((item) => (
+          {filteredItems.map((item) => (
             <ItemCard
               key={item.id}
               title={item.title}
